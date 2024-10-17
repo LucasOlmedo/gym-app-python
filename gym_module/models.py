@@ -186,7 +186,6 @@ class WorkoutSession(models.Model):
     date = models.DateTimeField(default=timezone.now)
     notes = models.TextField(blank=True, null=True)
     duration = models.DurationField(blank=True, null=True)
-    # workout_histories = models.ManyToManyField('WorkoutHistory', related_name='workout_sessions')
 
     def __str__(self):
         return f"Workout Session on {self.date} for {self.personal_info}"

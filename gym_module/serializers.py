@@ -51,3 +51,12 @@ class WorkoutSessionSerializer(serializers.ModelSerializer):
                 WorkoutSet.objects.create(workout_history=workout_history, **set_data)
 
         return workout_session
+
+    def update(self, instance, validated_data):
+        instance.session_name = validated_data.get('session_name', instance.session_name)
+        instance.date = validated_data.get('date', instance.date)
+        instance.notes = validated_data.get('notes', instance.notes)
+        instance.duration = validated_data.get('duration', instance.duration)
+        instance.save()
+
+        return instance
