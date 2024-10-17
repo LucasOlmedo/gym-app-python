@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Exercise
+from .models import Exercise, PersonalInfo
 
 class ExerciseSerializer(serializers.ModelSerializer):
 
@@ -15,3 +15,8 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
     def get_instructions(self, obj):
         return obj.instructions.split('||') if obj.instructions else []
+
+class PersonalInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonalInfo
+        fields = '__all__'
