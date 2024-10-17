@@ -179,3 +179,32 @@ class PersonalInfo(models.Model):
                        97.684 * math.log10(self.height_cm) - 78.387
 
         return round(body_fat, 2) if body_fat is not None else None
+
+class WorkoutSession(models.Model):
+    personal_info = models.ForeignKey(PersonalInfo, on_delete=models.CASCADE, related_name='workout_sessions')
+    session_name = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateTimeField(default=timezone.now)
+    notes = models.TextField(blank=True, null=True)
+    duration = models.DurationField(blank=True, null=True)
+    # workout_histories = models.ManyToManyField('WorkoutHistory', related_name='workout_sessions')
+
+    def __str__(self):
+        return f"Workout Session on {self.date} for {self.personal_info}"
+
+class WorkoutHistory(models.Model):
+    workout_session = models.ForeignKey(WorkoutSession, on_delete=models.CASCADE, related_name="workout_histories")
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    duration = models.DurationField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.personal_info} - {self.exercise} - {self.date}"
+
+class WorkoutSet(models.Model):
+    workout_history = models.ForeignKey(WorkoutHistory, on_delete=models.CASCADE, related_name="sets")
+    set_number = models.IntegerField()
+    weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    reps = models.IntegerField()
+    notes = models.TextField(blank=True, null=True)
+    rest_time = models.DurationField(blank=True, null=True)
