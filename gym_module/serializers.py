@@ -23,21 +23,21 @@ class PersonalInfoSerializer(serializers.ModelSerializer):
 class WorkoutSetSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkoutSet
-        fields = ['set_number', 'weight', 'reps', 'notes', 'rest_time']
+        fields = '__all__'
 
 class WorkoutHistorySerializer(serializers.ModelSerializer):
     sets = WorkoutSetSerializer(many=True)
 
     class Meta:
         model = WorkoutHistory
-        fields = ['exercise', 'date', 'duration', 'notes', 'sets']
+        fields = '__all__'
 
 class WorkoutSessionSerializer(serializers.ModelSerializer):
     workout_histories = WorkoutHistorySerializer(many=True)
 
     class Meta:
         model = WorkoutSession
-        fields = ['personal_info', 'session_name', 'date', 'notes', 'duration', 'workout_histories']
+        fields = '__all__'
 
     def create(self, validated_data):
         workout_histories_data = validated_data.pop('workout_histories')
