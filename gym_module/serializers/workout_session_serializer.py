@@ -1,36 +1,6 @@
 from rest_framework import serializers
-from .models import Exercise, PersonalInfo, WorkoutSession, WorkoutHistory, WorkoutSet
-
-class ExerciseSerializer(serializers.ModelSerializer):
-    secondary_muscles = serializers.SerializerMethodField()
-    instructions = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Exercise
-        fields = '__all__'
-
-    def get_secondary_muscles(self, obj):
-        return obj.secondary_muscles.split('||') if obj.secondary_muscles else []
-
-    def get_instructions(self, obj):
-        return obj.instructions.split('||') if obj.instructions else []
-
-class PersonalInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PersonalInfo
-        fields = '__all__'
-
-class WorkoutSetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WorkoutSet
-        fields = '__all__'
-
-class WorkoutHistorySerializer(serializers.ModelSerializer):
-    sets = WorkoutSetSerializer(many=True)
-
-    class Meta:
-        model = WorkoutHistory
-        fields = '__all__'
+from gym_module.models import WorkoutSession, WorkoutHistory, WorkoutSet
+from .workout_history_serializer import WorkoutHistorySerializer
 
 class WorkoutSessionSerializer(serializers.ModelSerializer):
     workout_histories = WorkoutHistorySerializer(many=True)

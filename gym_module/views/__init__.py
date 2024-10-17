@@ -1,0 +1,3 @@
+from .exercise_view import ExerciseViewSet
+from .personal_info_view import PersonalInfoViewSet
+from .workout_session_view import WorkoutSessionViewSet
