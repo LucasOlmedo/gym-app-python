@@ -8,3 +8,5 @@ python-dotenv
 requests
 django-filter
 pytest-django
+gunicorn
+whitenoise
