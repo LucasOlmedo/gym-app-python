@@ -1,0 +1,12 @@
+{
+    "name": "frontend",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "expo start"
+    },
+    "dependencies": {
+        "expo": "^48.0.0",
+        "react": "18.2.0",
+        "react-native": "0.72.0"
+    }
+}

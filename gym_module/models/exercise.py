@@ -5,7 +5,7 @@ class Exercise(models.Model):
     body_part = models.CharField(max_length=100)
     equipment = models.CharField(max_length=100)
     gif_url = models.CharField(max_length=100)
-    ref_id = models.CharField(max_length=100)
+    ref_id = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
     target = models.CharField(max_length=100)
     secondary_muscles = models.TextField()
