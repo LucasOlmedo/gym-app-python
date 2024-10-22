@@ -23,10 +23,10 @@ services:
       - db_data:/var/lib/mysql
   frontend:
     build:
-      context: ./frontend_react_app
+      context: ./frontend_module
       dockerfile: Dockerfile
     volumes:
-      - ./frontend_react_app:/usr/src/app
+      - ./frontend_module:/usr/src/app
     ports:
       - "19000:19000"
       - "19001:19001"
